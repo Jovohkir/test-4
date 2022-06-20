@@ -48,10 +48,11 @@ export default function App() {
         display: "flex",
         height: "100%",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        color: "red"
       }}
     >
-      <div className="App">
+      <div className="App" style={{ backgroundColor: "grey" }}>
         <button className="btn btn-primary" onClick={() => setModal(true)}>
           Add Posts
         </button>
