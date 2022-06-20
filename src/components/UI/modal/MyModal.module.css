@@ -11,7 +11,7 @@
   padding: 30px;
   background: rgb(222, 222, 231);
   border-radius: 20px;
-  min-width: 300px;
+  min-width: 400px;
 }
 .myModal.active {
   display: flex;
