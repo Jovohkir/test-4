@@ -3,7 +3,7 @@ import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
 
 function PostForm({ createPost }) {
-  const [post, setPost] = useState({ title: "", stack: "" });
+  const [post, setPost] = useState({ title: "", body: "" });
   const addPost = (e) => {
     e.preventDefault();
     const newPost = {
@@ -11,12 +11,12 @@ function PostForm({ createPost }) {
       id: Date.now()
     };
     console.log(newPost);
-    if (newPost.title === "" && newPost.stack === "") {
+    if (newPost.title === "" && newPost.body === "") {
       alert("Iltimos to'ldring..");
     } else {
       createPost(newPost);
     }
-    setPost({ title: "", stack: "" });
+    setPost({ title: "", body: "" });
   };
 
   return (
@@ -33,8 +33,8 @@ function PostForm({ createPost }) {
         type="text"
         className="form-control my-3"
         placeholder="your fovarite language"
-        value={post.stack}
-        onChange={(e) => setPost({ ...post, stack: e.target.value })}
+        value={post.body}
+        onChange={(e) => setPost({ ...post, body: e.target.value })}
       />
       <MyButton onClick={addPost}>Add Post</MyButton>
     </form>
