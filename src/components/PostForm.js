@@ -12,7 +12,7 @@ function PostForm({ createPost }) {
     };
     console.log(newPost);
     if (newPost.title === "" && newPost.body === "") {
-      alert("Iltimos to'ldring..");
+      alert("Iltimos katakchalarni to'ldring..");
     } else {
       createPost(newPost);
     }

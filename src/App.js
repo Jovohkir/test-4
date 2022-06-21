@@ -6,13 +6,19 @@ import PostForm from "./components/PostForm";
 import SortedAndFilter from "./SortedAndFilter";
 import MyModal from "./components/UI/modal/MyModal";
 import { usePost } from "./hooks/useCreatePost";
-import axios from "axios";
+import PostApi from "./api/PostApi";
+import MyLoader from "./components/UI/loader/MyLoader";
+import { UseFetching } from "./hooks/UseFetching";
 
 export default function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const sortedAndsearchPosts = usePost(posts, filter.sort, filter.query);
+  const [fetchPosts, isLoading, err] = UseFetching(async () => {
+    const posts = await PostApi.getAllPosts();
+    setPosts(posts);
+  });
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -23,14 +29,6 @@ export default function App() {
       setModal(false);
     }
   };
-
-  async function fetchPosts() {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    setPosts(response.data);
-  }
-
   const removePost = (post) => {
     setPosts(posts.filter((s) => s.id !== post.id));
   };
@@ -47,7 +45,6 @@ export default function App() {
       }}
     >
       <div className="App" style={{ backgroundColor: "#fff" }}>
-        <button onClick={fetchPosts}>get</button>
         <button className="btn btn-primary" onClick={() => setModal(true)}>
           Add Posts
         </button>
@@ -55,11 +52,20 @@ export default function App() {
           <PostForm createPost={createPost} />
         </MyModal>
         <SortedAndFilter filter={filter} setFilter={setFilter} />
-        <TableList
-          removePost={removePost}
-          posts={sortedAndsearchPosts}
-          title="FULL POST"
-        />
+        {/* Api Error bolsa chiqaradi */}
+        {err && <p>Error</p>}
+        {/* bu yerda server loading qiladigan function yozilgan loader fayli divni ichida chaqirilgan */}
+        {isLoading ? (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <MyLoader />
+          </div>
+        ) : (
+          <TableList
+            removePost={removePost}
+            posts={sortedAndsearchPosts}
+            title="FULL POST"
+          />
+        )}
       </div>
     </div>
   );
