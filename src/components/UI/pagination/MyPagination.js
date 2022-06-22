@@ -1,5 +1,4 @@
 import React from "react";
-import MyButton from "../button/MyButton";
 import { getPageArray } from "../../../utils/Page";
 
 const MyPadination = ({ totalPage, page, changePage }) => {
