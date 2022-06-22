@@ -4,10 +4,10 @@ export const UseFetching = (calback) => {
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const fetching = async () => {
+  const fetching = async (...args) => {
     try {
       setIsLoading(true);
-      await calback();
+      await calback(...args);
     } catch (e) {
       setErr(e.massage);
     } finally {

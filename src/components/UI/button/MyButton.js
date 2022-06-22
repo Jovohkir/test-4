@@ -1,6 +1,6 @@
 import React from "react";
 
-const myButton = ({ children, ...props }) => {
+const MyButton = ({ children, ...props }) => {
   return (
     <div>
       <button {...props} className="btn btn-primary w-100">
@@ -9,4 +9,4 @@ const myButton = ({ children, ...props }) => {
     </div>
   );
 };
-export default myButton;
+export default MyButton;

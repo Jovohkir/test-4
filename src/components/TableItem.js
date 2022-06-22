@@ -6,7 +6,7 @@ const TableItem = (props) => {
     <div className="border my-2 p-3 d-flex justify-content-between align-items-center">
       <div>
         <span>
-          {props.number}.<b> {props.post.title}</b>
+          {props.post.id}.<b> {props.post.title}</b>
         </span>
 
         <p className="lead">{props.post.body}</p>

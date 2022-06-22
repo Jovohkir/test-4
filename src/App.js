@@ -9,18 +9,29 @@ import { usePost } from "./hooks/useCreatePost";
 import PostApi from "./api/PostApi";
 import MyLoader from "./components/UI/loader/MyLoader";
 import { UseFetching } from "./hooks/UseFetching";
+import { getPageCount, getPageArray } from "./utils/Page";
+import MyPadination from "./components/UI/pagination/MyPagination";
 
 export default function App() {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const sortedAndsearchPosts = usePost(posts, filter.sort, filter.query);
-  const [fetchPosts, isLoading, err] = UseFetching(async () => {
-    const posts = await PostApi.getAllPosts();
-    setPosts(posts);
+  //  jsondagi malumotlarni bolaklarga bolib bolimlarga bolish uchun function ishlatdik
+  const [totalPage, setTotalPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  //////////////////////////////////////////////////
+  const [fetchPosts, isLoading, err] = UseFetching(async (limit, page) => {
+    const response = await PostApi.getAllPosts(limit, page);
+    setPosts(response.data);
+    // bu joyda Pagedagi function chaqirib ishlatdik
+    const totalCount = response.headers["x-total-count"];
+    setTotalPage(getPageCount(totalCount, limit));
   });
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(limit, page);
   }, []);
 
   const createPost = (newPost) => {
@@ -31,6 +42,10 @@ export default function App() {
   };
   const removePost = (post) => {
     setPosts(posts.filter((s) => s.id !== post.id));
+  };
+  const changePage = (page) => {
+    setPage(page);
+    fetchPosts(limit, page);
   };
 
   return (
@@ -66,6 +81,11 @@ export default function App() {
             title="FULL POST"
           />
         )}
+        <MyPadination
+          page={page}
+          changePage={changePage}
+          totalPage={totalPage}
+        />
       </div>
     </div>
   );
