@@ -5,9 +5,13 @@ const LogIn = () => {
   return (
     <>
       <div
+        className="container"
         style={{
-          width: "200px",
-          border: "1px solid grey"
+          width: "300px",
+          border: "1px solid grey",
+          borderRadius: "5px",
+          color: "grey",
+          marginTop: "50px"
         }}
       >
         <form>
