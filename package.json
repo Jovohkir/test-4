@@ -12,6 +12,7 @@
     "advisor-select2-bootstrap-5-theme": "1.1.1",
     "axios": "0.27.2",
     "bootstrap": "5.1.3",
+    "bootstrap-form": "1.0.1",
     "bootstrapjs": "2.0.0",
     "end-nglibrary-app": "0.0.79",
     "lodash": "4.17.21",
