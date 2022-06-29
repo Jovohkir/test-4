@@ -4,7 +4,12 @@ import React from "react";
 const LogIn = () => {
   return (
     <>
-      <div className="container">
+      <div
+        style={{
+          width: "200px",
+          border: "1px solid grey"
+        }}
+      >
         <form>
           <h3 className="text-center">Log In</h3>
           <div className="mb-3">
