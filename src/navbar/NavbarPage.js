@@ -25,8 +25,11 @@ const NavbarPage = () => {
           <Link class="py-2 text-dark text-decoration-none" to="/Game">
             Game
           </Link>
-          <Link className="btn btn-primary mx-2 my-1" to="/LogIn">
-            Log In
+          <Link
+            className="py-2 text-dark text-decoration-none mx-2"
+            to="/LogIn"
+          >
+            LogIn
           </Link>
         </nav>
       </div>
